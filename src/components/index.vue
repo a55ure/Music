@@ -23,8 +23,16 @@
         <div class="PopularRecommendationItem" v-for="item in PopularRecommendationList" :key="item.id">
           <div class="PopularRecommendationItemContent">
             <div class="coverImgUrl">
-              <div class="mask">
-                <Icon type="play"></Icon>
+              <div class="maskDisplay">
+                <div class="mask">
+                  <Icon type="play"></Icon>
+                </div>
+              </div>
+              <div class="playCount">
+                <div class="playCountContent">
+                  <Icon type="headphone"></Icon>
+                  <p>{{getPlayCount(item.playCount)}}</p>
+                </div>
               </div>
               <img :src="item.coverImgUrl" alt="">
             </div>
@@ -64,13 +72,23 @@ export default {
     // 获取热门推荐
     getPopularRecommendation () {
       var that = this
-      this.$axios.get('http://39.98.144.206:3300/top/playlist/highquality?limit=5').then(function (res) {
+      this.$axios.get('http://39.98.144.206:3300/top/playlist/highquality?limit=6').then(function (res) {
         that.PopularRecommendationList = res.data.playlists
         console.log(res.data.playlists)
       }).catch(function (res) {
         console.log(res)
       })
+    },
+    // 取整播放次数
+    getPlayCount (playCout) {
+      // this.PopularRecommendationList
+      if ((playCout / 10000) > 0) {
+        return Math.floor(playCout / 1000) + ' t'
+      } else if ((playCout / 1000) > 0) {
+        return Math.floor(playCout / 100) + ' t'
+      }
     }
+
   }
 
 }
@@ -133,24 +151,51 @@ export default {
             position: relative
 
             &:hover
+
               img
                 transform: translateY(-5px)
-                transition: .3s ease-in-out
+                transition: .1s ease-in-out
 
-            .mask
+              .maskDisplay
+                //transition: .6s ease-in-out
+                display: block
+
+            .playCount
               position: absolute
-              top: 0
-              z-index: 999
-              background: rgba(0, 0, 0, 0.5)
-              height: 170px
-              width: 170px
-              display: flex
-              justify-content: center
-              align-items: center
-              border-radius: 10px
+              bottom: 10px
+              right: 10px
+              .playCountContent
+                height: 20px
+                border-radius: 10px
+                background-color: rgba(0, 0, 0, 0.8)
+                display: flex
+                justify-content: center
+                align-items: center
+                padding: 2px 5px
+                i
+                  margin-right: 2px
 
-              i
-                font-size: 30px
+            .maskDisplay
+              display: none
+
+              .mask
+                position: absolute
+                top: 0
+                z-index: 999
+                background: rgba(0, 0, 0, 0.5)
+                height: 170px
+                width: 170px
+                display: flex
+                justify-content: center
+                align-items: center
+                border-radius: 10px
+                //transform: translateY(5px)
+
+                i
+                  font-size: 30px
+
+                  &:hover
+                    color: #1ecf9d
 
             img
               height: 170px
