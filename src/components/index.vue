@@ -45,7 +45,30 @@
             </div>
           </div>
         </div>
-      </div><div class="PopularRecommendationItemAll">
+      </div>
+      <div class="PopularRecommendationItemAll">
+        <div class="PopularRecommendationItem" v-for="item in PopularRecommendationList" :key="item.id">
+          <div class="PopularRecommendationItemContent">
+            <div class="coverImgUrl">
+              <div class="maskDisplay">
+                <div class="mask">
+                  <Icon type="play"></Icon>
+                </div>
+              </div>
+              <div class="playCount">
+                <div class="playCountContent">
+                  <Icon type="headphone"></Icon>
+                  <p>{{ getPlayCount(item.playCount) }}</p>
+                </div>
+              </div>
+              <img :src="item.coverImgUrl" alt="">
+            </div>
+            <div class="copywriter">
+              {{ item.copywriter }}
+            </div>
+          </div>
+        </div>
+      </div>  <div class="PopularRecommendationItemAll">
         <div class="PopularRecommendationItem" v-for="item in PopularRecommendationList" :key="item.id">
           <div class="PopularRecommendationItemContent">
             <div class="coverImgUrl">
@@ -218,7 +241,7 @@ export default {
               .mask
                 position: absolute
                 top: 5px
-                z-index: 999
+                z-index: 3
                 background: rgba(0, 0, 0, 0.5)
                 height: 170px
                 width: 170px

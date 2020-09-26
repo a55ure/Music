@@ -7,7 +7,8 @@
             second / 60 > 9 ? parseInt(second / 60) : '0' + parseInt(second / 60)
           }}:{{ second % 60 >= 10 ? parseInt(second % 60) : '0' + parseInt(second % 60) }}
         </span>
-      <el-progress :percentage="progressing_audio" color="#1ecf9d" :stroke-width="4" show-text=false
+      <el-progress :percentage="progressing_audio" :format="processFormat" color="#1ecf9d" :stroke-width="4"
+                   show-text=false
                    style="margin-top:.1rem;margin-left:.3rem;float:left;width:95%;"></el-progress>
       <div class="playerOperation">
         <img :src="audioPlayShow ? imgA : imgB" class="rong-circle-control" @click="controlAudio()">
@@ -44,6 +45,9 @@ export default {
     }
   },
   methods: {
+    processFormat: function (percentage) {
+      return this.second
+    },
     controlAudio: function () {
       if (!this.params) {
         return false
@@ -92,7 +96,7 @@ export default {
 
 .time-font {
   margin-top: .1rem;
-  font-size: .24rem;
+  font-size: .5rem;
   font-family: PingFangSC-Regular;
   font-weight: 400;
   color: rgba(153, 153, 153, 1);
@@ -103,12 +107,12 @@ export default {
 }
 
 .audio-box {
-  height: 60px;
+  height: 75px;
   width: 100%;
   padding: 0;
   margin: 0;
   background: #1e1e20;
   box-shadow: 0px 14px 30px 0px rgba(154, 159, 182, 0.1);
-  //border-radius: .20rem;
+//border-radius: .20rem;
 }
 </style>
