@@ -99,19 +99,19 @@
 <script>
 export default {
   name: 'index',
-  data() {
+  data () {
     return {
       CarouselList: '',
       PopularRecommendationList: ''
     }
   },
-  created() {
+  created () {
     this.getCarousel()
     this.getPopularRecommendation()
   },
   methods: {
     // 走马灯获取
-    getCarousel() {
+    getCarousel () {
       var that = this
       this.$axios.get('http://39.98.144.206:3000/personalized/newsong').then(function (res) {
         that.CarouselList = res.data.result
@@ -120,10 +120,9 @@ export default {
       })
     },
     // 获取热门推荐
-    getPopularRecommendation() {
+    getPopularRecommendation () {
       var that = this
       this.$axios.get('http://39.98.144.206:3000/top/playlist/highquality?limit=6').then(function (res) {
-        f
         that.PopularRecommendationList = res.data.playlists
         console.log(res.data.playlists)
       }).catch(function (res) {
@@ -131,7 +130,7 @@ export default {
       })
     },
     // 取整播放次数
-    getPlayCount(playCout) {
+    getPlayCount (playCout) {
       // this.PopularRecommendationList
       if ((playCout / 100000) > 0) {
         return Math.floor(playCout / 10000) + ' 万'

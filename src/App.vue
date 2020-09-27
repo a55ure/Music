@@ -96,6 +96,10 @@ html, body
   min-width: 1100px
   min-height: 800px
   position: relative
+  height: 100%
+  overflow: auto
+  margin: 0
+  overflow-x: hidden
 
   #app
     height: 100%
@@ -210,15 +214,18 @@ html, body
       overflow-x: hidden
       overflow-y: scroll
       background-color: #1e1e20
+
       &::-webkit-scrollbar
         display: none
+
       .indexPage
 
     .Progress
+      width: 83%
+      z-index: 4
+      position: absolute
+      bottom: 0
+
       .playerAu
-        z-index: 4
-        max-width: 1391px
-        position: absolute
-        bottom: 0
-        width: 100%
+
 </style>
