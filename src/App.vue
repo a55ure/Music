@@ -3,41 +3,41 @@
     <div class="left">
       <div class="leftTop">
         <Icon type="headphone"></Icon>
-        <p>YksMusic</p>
+        <p>yksMusic</p>
       </div>
       <div class="MusicList">
-        <p>Online music</p>
+        <p>在线音乐</p>
         <div class="leftMusicItem bg">
           <Icon type="music-note"></Icon>
-          <p>Music Hall</p>
+          <p>音乐馆</p>
         </div>
         <div class="leftMusicItem">
           <Icon type="ios-videocam"></Icon>
-          <p>Video</p>
+          <p>MV</p>
         </div>
         <div class="leftMusicItem">
           <Icon type="ios-paw"></Icon>
-          <p>Radio Station</p>
+          <p>音乐电台</p>
         </div>
       </div>
       <div class="MusicList">
-        <p>My Music</p>
+        <p>我的音乐</p>
         <div class="leftMusicItem">
           <Icon type="heart"></Icon>
-          <p>Love</p>
+          <p>我喜爱</p>
         </div>
 
-        <div class="leftMusicItem">
-          <Icon type="ios-folder"></Icon>
-          <p>Download</p>
-        </div>
+<!--        <div class="leftMusicItem">-->
+<!--          <Icon type="ios-folder"></Icon>-->
+<!--          <p>Download</p>-->
+<!--        </div>-->
         <div class="leftMusicItem">
           <Icon type="ios-clock"></Icon>
-          <p>Play History</p>
+          <p>播放历史</p>
         </div>
         <div class="leftMusicItem">
           <Icon type="android-list"></Icon>
-          <p>Audition List</p>
+          <p>播放列表</p>
         </div>
       </div>
     </div>
@@ -69,6 +69,7 @@
         <!--        <router-view></router-view>-->
         <indexVue class="indexPage"></indexVue>
       </div>
+<!--      播放进度信息-->
       <div class="Progress">
         <playerAu class="playerAu"></playerAu>
       </div>
@@ -107,7 +108,7 @@ html, body
     font-family: A
     text-align: center
     display: grid
-    grid-template-columns: 17% 83%
+    grid-template-columns: 15% 85%
 
     .left
       height: 100%
@@ -221,9 +222,9 @@ html, body
       .indexPage
 
     .Progress
-      width: 83%
+      width: 85%
       z-index: 4
-      position: absolute
+      position: fixed
       bottom: 0
 
       .playerAu

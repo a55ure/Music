@@ -54,6 +54,8 @@
         </div>
         <div class="list">
           <span class="material-icons">queue_music</span>
+<!--          播放了列表数量-->
+          <span>{{12}}</span>
         </div>
       </div>
     </div>
@@ -78,7 +80,7 @@ export default {
   data () {
     return {
       songName: '告白气球',
-      playerIcon: 'pause_circle_filled',
+      playerIcon: 'play_circle_filled',
       progressing_audio: 0,
       music: tryaudio,
       playFlag: false,
@@ -127,8 +129,8 @@ export default {
           }, 100)
         } else {
           audio0.pause()
-          this.audioPlayShow = true
           this.playerIcon = 'play_circle_filled'
+          this.audioPlayShow = true
           clearInterval(this.timer)
         }
       }
@@ -247,7 +249,10 @@ export default {
             color: #1ecf9d
 
     .playTimeAndList
+      //background-color: #2db7f5
       display: flex
+      justify-content: center
+      align-items: center
       .time
         .time-font
           margin-top: .1rem
@@ -258,5 +263,13 @@ export default {
           line-height: .34rem
           float: left
           margin-left: 0rem
+      .list
+        //background-color: #1ecf9d
+        margin-left: 10px
+        height: 100%
+        color: #f9f9f9
+        display: flex
+        justify-content: center
+        align-items: center
 
 </style>

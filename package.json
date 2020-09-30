@@ -1,5 +1,5 @@
 {
-  "name": "qqmusic",
+  "name": "Music",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
     "core-js": "^3.6.5",
     "element-ui": "^2.4.5",
     "iview": "^1.0.2",
+    "material-design-icons": "^3.0.1",
     "view-design": "^4.0.0",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",

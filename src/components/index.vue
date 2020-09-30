@@ -1,7 +1,7 @@
 <template>
   <div class="indexContent">
     <div class="PageName">
-      Music Hall
+      音乐馆
     </div>
     <!--    走马灯-->
     <div class="Carousel">
@@ -18,85 +18,56 @@
       <div class="PopularRecommendationTop">
         <div class="title">
           <div>
-            <p>High Quality Song List</p>
+            <p>热门推荐</p>
           </div>
-          <Icon type="arrow-down-b"></Icon>
-        </div>
-      </div>
-      <div class="PopularRecommendationItemAll">
-        <div class="PopularRecommendationItem" v-for="item in PopularRecommendationList" :key="item.id">
-          <div class="PopularRecommendationItemContent">
-            <div class="coverImgUrl">
-              <div class="maskDisplay">
-                <div class="mask">
-                  <Icon type="play"></Icon>
-                </div>
-              </div>
-              <div class="playCount">
-                <div class="playCountContent">
-                  <Icon type="headphone"></Icon>
-                  <p>{{ getPlayCount(item.playCount) }}</p>
-                </div>
-              </div>
-              <img :src="item.coverImgUrl" alt="">
-            </div>
-            <div class="copywriter">
-              {{ item.copywriter }}
-            </div>
+          <div class="songListMore">
+            <span>更多</span>
+            <span class="material-icons">arrow_forward_ios</span>
           </div>
         </div>
       </div>
       <div class="PopularRecommendationItemAll">
-        <div class="PopularRecommendationItem" v-for="item in PopularRecommendationList" :key="item.id">
-          <div class="PopularRecommendationItemContent">
-            <div class="coverImgUrl">
-              <div class="maskDisplay">
-                <div class="mask">
-                  <Icon type="play"></Icon>
-                </div>
-              </div>
-              <div class="playCount">
-                <div class="playCountContent">
-                  <Icon type="headphone"></Icon>
-                  <p>{{ getPlayCount(item.playCount) }}</p>
-                </div>
-              </div>
-              <img :src="item.coverImgUrl" alt="">
-            </div>
-            <div class="copywriter">
-              {{ item.copywriter }}
-            </div>
-          </div>
+        <div class="slide">
+          <span class="material-icons">arrow_back_ios</span>
+        </div>
+        <!--        <div class="PopularRecommendationItem" v-for="item in PopularRecommendationList" :key="item.id">-->
+        <!--          <div class="PopularRecommendationItemContent">-->
+        <!--            <div class="coverImgUrl">-->
+        <!--              <div class="maskDisplay">-->
+        <!--                <div class="mask">-->
+        <!--                  <Icon type="play"></Icon>-->
+        <!--                </div>-->
+        <!--              </div>-->
+        <!--              <div class="playCount">-->
+        <!--                <div class="playCountContent">-->
+        <!--                  <Icon type="headphone"></Icon>-->
+        <!--                  <p>{{ getPlayCount(item.playCount) }}</p>-->
+        <!--                </div>-->
+        <!--              </div>-->
+        <!--              <img :src="item.coverImgUrl" alt="">-->
+        <!--            </div>-->
+        <!--            <div class="copywriter">-->
+        <!--              {{ item.copywriter }}-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+<!--        <div>{{PopularRecommendationList}}</div>-->
+        <song-list :songList="PopularRecommendationList"></song-list>
+        <div class="slide">
+          <span class="material-icons">arrow_forward_ios</span>
         </div>
       </div>
-      <div class="PopularRecommendationItemAll">
-        <div class="PopularRecommendationItem" v-for="item in PopularRecommendationList" :key="item.id">
-          <div class="PopularRecommendationItemContent">
-            <div class="coverImgUrl">
-              <div class="maskDisplay">
-                <div class="mask">
-                  <Icon type="play"></Icon>
-                </div>
-              </div>
-              <div class="playCount">
-                <div class="playCountContent">
-                  <Icon type="headphone"></Icon>
-                  <p>{{ getPlayCount(item.playCount) }}</p>
-                </div>
-              </div>
-              <img :src="item.coverImgUrl" alt="">
-            </div>
-            <div class="copywriter">
-              {{ item.copywriter }}
-            </div>
-          </div>
-        </div>
-      </div>
+    </div>
+    <div class="Placeholder">
+      <hr>
+      <p>END</p>
     </div>
   </div>
 </template>
 
 <script>
+import songList from './songList'
+
 export default {
   name: 'index',
   data () {
@@ -104,6 +75,9 @@ export default {
       CarouselList: '',
       PopularRecommendationList: ''
     }
+  },
+  components: {
+    songList
   },
   created () {
     this.getCarousel()
@@ -122,9 +96,10 @@ export default {
     // 获取热门推荐
     getPopularRecommendation () {
       var that = this
-      this.$axios.get('http://39.98.144.206:3000/top/playlist/highquality?limit=6').then(function (res) {
-        that.PopularRecommendationList = res.data.playlists
-        console.log(res.data.playlists)
+      this.$axios.get('http://39.98.144.206:3000/top/playlist/highquality?limit=5').then(function (res) {
+        that.PopularRecommendationList = res
+        // that.PopularRecommendationList = res.data.playlists
+        console.log(that.PopularRecommendationList)
       }).catch(function (res) {
         console.log(res)
       })
@@ -153,7 +128,7 @@ export default {
 
   .PageName
     color: #f9f9f9
-    font-size: 25px
+    font-size: 30px
     font-weight: bolder
     height: 70px
     display: flex
@@ -181,11 +156,25 @@ export default {
         align-items: center
 
         p
-          font-size: 15px
+          font-size: 25px
 
         i
           font-size: 15px
           margin-right: 5px
+
+        .songListMore
+          display: flex
+          justify-content: center
+          align-items: center
+          cursor: pointer
+
+          &:hover
+            span
+              color: #1ecf9d
+
+          span
+            color: #7A7A7C
+            font-size: 15px
 
     .PopularRecommendationItemAll
       flex-direction: row
@@ -193,74 +182,30 @@ export default {
       justify-content: space-around
       align-items: center
       min-width: 1025px
+      overflow: hidden
 
-      .PopularRecommendationItem
-        color: #f9f9f9
+      .slide
+        cursor: pointer
 
-        .PopularRecommendationItemContent
-          .coverImgUrl
-            height: 180px
-            width: 180px
-            display: flex
-            justify-content: center
-            align-items: center
-            position: relative
+        &:hover
+          span
+            color: #1ecf9d
 
-            &:hover
+        span
+          color: #7A7A7C
 
-              img
-                //transform: translateY(-5px)
-                transition: .1s ease-in-out
+  .Placeholder
+    hr
+      opacity: 0.5
+      height: 1px
+      border: none
+      color: #aaaaaa
+      background-color: #aaaaaa
+      margin: 20px 0
 
-              .maskDisplay
-                //transition: .6s ease-in-out
-                display: block
-
-              .playCount
-                display: none
-
-            .playCount
-              position: absolute
-              bottom: 10px
-              right: 10px
-
-              .playCountContent
-                height: 20px
-                border-radius: 10px
-                background-color: rgba(0, 0, 0, 0.8)
-                display: flex
-                justify-content: center
-                align-items: center
-                padding: 2px 5px
-
-                i
-                  margin-right: 2px
-
-            .maskDisplay
-              display: none
-
-              .mask
-                position: absolute
-                top: 5px
-                z-index: 3
-                background: rgba(0, 0, 0, 0.5)
-                height: 170px
-                width: 170px
-                display: flex
-                justify-content: center
-                align-items: center
-                border-radius: 10px
-                //transform: translateY(5px)
-
-                i
-                  font-size: 30px
-
-                  &:hover
-                    color: #1ecf9d
-
-            img
-              height: 170px
-              width: 170px
-              border-radius: 10px
+    p
+      height: 110px
+      color: #f9f9f9
+      font-size: 20px
 
 </style>
