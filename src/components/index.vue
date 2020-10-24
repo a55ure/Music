@@ -30,29 +30,29 @@
         <div class="slide">
           <span class="material-icons">arrow_back_ios</span>
         </div>
-        <!--        <div class="PopularRecommendationItem" v-for="item in PopularRecommendationList" :key="item.id">-->
-        <!--          <div class="PopularRecommendationItemContent">-->
-        <!--            <div class="coverImgUrl">-->
-        <!--              <div class="maskDisplay">-->
-        <!--                <div class="mask">-->
-        <!--                  <Icon type="play"></Icon>-->
-        <!--                </div>-->
-        <!--              </div>-->
-        <!--              <div class="playCount">-->
-        <!--                <div class="playCountContent">-->
-        <!--                  <Icon type="headphone"></Icon>-->
-        <!--                  <p>{{ getPlayCount(item.playCount) }}</p>-->
-        <!--                </div>-->
-        <!--              </div>-->
-        <!--              <img :src="item.coverImgUrl" alt="">-->
-        <!--            </div>-->
-        <!--            <div class="copywriter">-->
-        <!--              {{ item.copywriter }}-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--        </div>-->
-<!--        <div>{{PopularRecommendationList}}</div>-->
-        <song-list :songList="PopularRecommendationList"></song-list>
+<!--        <div class="PopularRecommendationItem" v-for="item in PopularRecommendationList" :key="item.id">-->
+<!--          <div class="PopularRecommendationItemContent">-->
+<!--            <div class="coverImgUrl">-->
+<!--              <div class="maskDisplay">-->
+<!--                <div class="mask">-->
+<!--                  <Icon type="play"></Icon>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="playCount">-->
+<!--                <div class="playCountContent">-->
+<!--                  <Icon type="headphone"></Icon>-->
+<!--                  <p>{{ getPlayCount(item.playCount) }}</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <img :src="item.coverImgUrl" alt="">-->
+<!--            </div>-->
+<!--            <div class="copywriter">-->
+<!--              {{ item.copywriter }}-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div>{{ PopularRecommendationList }}</div>-->
+        <songList v-if="PopularRecommendationList" :songList="PopularRecommendationList"></songList>
         <div class="slide">
           <span class="material-icons">arrow_forward_ios</span>
         </div>
@@ -66,11 +66,11 @@
 </template>
 
 <script>
-import songList from './songList'
+import songList from '@/components/songList.vue'
 
 export default {
   name: 'index',
-  data () {
+  data() {
     return {
       CarouselList: '',
       PopularRecommendationList: ''
@@ -79,13 +79,13 @@ export default {
   components: {
     songList
   },
-  created () {
+  created() {
     this.getCarousel()
     this.getPopularRecommendation()
   },
   methods: {
     // 走马灯获取
-    getCarousel () {
+    getCarousel() {
       var that = this
       this.$axios.get('http://39.98.144.206:3000/personalized/newsong').then(function (res) {
         that.CarouselList = res.data.result
@@ -94,7 +94,7 @@ export default {
       })
     },
     // 获取热门推荐
-    getPopularRecommendation () {
+    getPopularRecommendation() {
       var that = this
       this.$axios.get('http://39.98.144.206:3000/top/playlist/highquality?limit=5').then(function (res) {
         that.PopularRecommendationList = res
@@ -105,7 +105,7 @@ export default {
       })
     },
     // 取整播放次数
-    getPlayCount (playCout) {
+    getPlayCount(playCout) {
       // this.PopularRecommendationList
       if ((playCout / 100000) > 0) {
         return Math.floor(playCout / 10000) + ' 万'

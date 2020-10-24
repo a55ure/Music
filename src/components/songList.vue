@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div>{{ songList }}</div>
+    <!--    <div>123123123123123</div>-->
+    <div>{{ songList }}1231241564856456</div>
     <div class="PopularRecommendationItem" v-for="item in songList" :key="item.id">
       <div class="PopularRecommendationItemContent">
         <div class="coverImgUrl">
@@ -32,11 +33,13 @@ export default {
     return {}
   },
   props: {
-    songList: {}
+    songList: {
+      type: Object
+    }
   },
   mounted() {
-    console.log('songlist')
-    console.log(this.songList)
+    // console.log('songlist')
+    // console.log(this.songList, 77777)
   }
 }
 </script>
