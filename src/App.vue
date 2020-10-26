@@ -27,10 +27,10 @@
           <p>我喜爱</p>
         </div>
 
-<!--        <div class="leftMusicItem">-->
-<!--          <Icon type="ios-folder"></Icon>-->
-<!--          <p>Download</p>-->
-<!--        </div>-->
+        <!--        <div class="leftMusicItem">-->
+        <!--          <Icon type="ios-folder"></Icon>-->
+        <!--          <p>Download</p>-->
+        <!--        </div>-->
         <div class="leftMusicItem">
           <Icon type="ios-clock"></Icon>
           <p>播放历史</p>
@@ -69,7 +69,7 @@
         <!--        <router-view></router-view>-->
         <indexVue class="indexPage"></indexVue>
       </div>
-<!--      播放进度信息-->
+      <!--      播放进度信息-->
       <div class="Progress">
         <playerAu class="playerAu"></playerAu>
       </div>
@@ -83,6 +83,11 @@ import indexVue from '@/components/index.vue'
 
 export default {
   name: 'app',
+  data() {
+    return {
+      input: 0
+    }
+  },
   components: {
     playerAu,
     indexVue

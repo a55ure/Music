@@ -27,35 +27,13 @@
         </div>
       </div>
       <div class="PopularRecommendationItemAll">
-        <div class="slide">
-          <span class="material-icons">arrow_back_ios</span>
-        </div>
-<!--        <div class="PopularRecommendationItem" v-for="item in PopularRecommendationList" :key="item.id">-->
-<!--          <div class="PopularRecommendationItemContent">-->
-<!--            <div class="coverImgUrl">-->
-<!--              <div class="maskDisplay">-->
-<!--                <div class="mask">-->
-<!--                  <Icon type="play"></Icon>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="playCount">-->
-<!--                <div class="playCountContent">-->
-<!--                  <Icon type="headphone"></Icon>-->
-<!--                  <p>{{ getPlayCount(item.playCount) }}</p>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <img :src="item.coverImgUrl" alt="">-->
-<!--            </div>-->
-<!--            <div class="copywriter">-->
-<!--              {{ item.copywriter }}-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div>{{ PopularRecommendationList }}</div>-->
+        <!--        <div class="slide">-->
+        <!--          <span class="material-icons">arrow_back_ios</span>-->
+        <!--        </div>-->
         <songList v-if="PopularRecommendationList" :songList="PopularRecommendationList"></songList>
-        <div class="slide">
-          <span class="material-icons">arrow_forward_ios</span>
-        </div>
+        <!--        <div class="slide">-->
+        <!--          <span class="material-icons">arrow_forward_ios</span>-->
+        <!--        </div>-->
       </div>
     </div>
     <div class="Placeholder">
@@ -97,9 +75,9 @@ export default {
     getPopularRecommendation() {
       var that = this
       this.$axios.get('http://39.98.144.206:3000/top/playlist/highquality?limit=5').then(function (res) {
-        that.PopularRecommendationList = res
-        // that.PopularRecommendationList = res.data.playlists
-        console.log(that.PopularRecommendationList)
+        // that.PopularRecommendationList = res
+        that.PopularRecommendationList = res.data.playlists
+        // console.log(that.PopularRecommendationList)
       }).catch(function (res) {
         console.log(res)
       })
@@ -142,9 +120,11 @@ export default {
         height: 200px
 
   .PopularRecommendation
+    width:100%
+
     .PopularRecommendationTop
       display: flex
-      justify-content: space-between
+      justify-content: space-around
       align-content: center
 
       .title
@@ -177,15 +157,18 @@ export default {
             font-size: 15px
 
     .PopularRecommendationItemAll
+      position: relative
       flex-direction: row
       display: flex
-      justify-content: space-around
+      //justify-content: space-around
       align-items: center
+      width: 100%
       min-width: 1025px
       overflow: hidden
 
       .slide
         cursor: pointer
+        position: absolute
 
         &:hover
           span
