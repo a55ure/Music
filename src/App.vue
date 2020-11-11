@@ -106,6 +106,8 @@ html, body
   overflow: auto
   margin: 0
   overflow-x: hidden
+  &::-webkit-scrollbar
+    display: none
 
   #app
     height: 100%

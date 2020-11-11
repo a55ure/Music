@@ -1,9 +1,6 @@
 <template>
   <div>
     <div class="PopularS">
-      <div class="slide">
-        <span class="material-icons">arrow_back_ios</span>
-      </div>
       <div class="PopularRecommendationItem" v-for="item in songList" :key="item.id">
         <div class="PopularRecommendationItemContent">
           <div class="coverImgUrl">
@@ -24,9 +21,6 @@
             {{ item.copywriter }}
           </div>
         </div>
-      </div>
-      <div class="slide">
-        <span class="material-icons">arrow_forward_ios</span>
       </div>
     </div>
   </div>
@@ -69,26 +63,27 @@ export default {
   width: 1210px
   min-width: 1100px
   display: flex
-  justify-content: space-around
+  //justify-content: space-around
 
-  .slide
-    display: flex
-    align-items: center
-    justify-content: center
-    cursor: pointer
-
-    &:hover
-      span
-        color: #1ecf9d
-
-    span
-      color: #7A7A7C
+  //.slide
+  //  display: flex
+  //  align-items: center
+  //  justify-content: center
+  //  cursor: pointer
+  //
+  //  &:hover
+  //    span
+  //      color: #1ecf9d
+  //
+  //  span
+  //    color: #7A7A7C
 
   .PopularRecommendationItem
     color: #f9f9f9
 
     .PopularRecommendationItemContent
       width: 180px
+      margin: 0 20px
       margin-bottom: 10px
 
       .coverImgUrl

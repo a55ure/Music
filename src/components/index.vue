@@ -27,13 +27,7 @@
         </div>
       </div>
       <div class="PopularRecommendationItemAll">
-        <!--        <div class="slide">-->
-        <!--          <span class="material-icons">arrow_back_ios</span>-->
-        <!--        </div>-->
-        <songList v-if="PopularRecommendationList" :songList="PopularRecommendationList"></songList>
-        <!--        <div class="slide">-->
-        <!--          <span class="material-icons">arrow_forward_ios</span>-->
-        <!--        </div>-->
+        <scroll></scroll>
       </div>
     </div>
     <div class="Placeholder">
@@ -45,6 +39,7 @@
 
 <script>
 import songList from '@/components/songList.vue'
+import scroll from '@/components/scroll.vue'
 
 export default {
   name: 'index',
@@ -55,7 +50,8 @@ export default {
     }
   },
   components: {
-    songList
+    songList,
+    scroll
   },
   created() {
     this.getCarousel()
@@ -120,7 +116,7 @@ export default {
         height: 200px
 
   .PopularRecommendation
-    width:100%
+    width: 100%
 
     .PopularRecommendationTop
       display: flex
@@ -166,16 +162,18 @@ export default {
       min-width: 1025px
       overflow: hidden
 
-      .slide
-        cursor: pointer
-        position: absolute
-
-        &:hover
-          span
-            color: #1ecf9d
-
-        span
-          color: #7A7A7C
+      //.slide
+      //  display: flex
+      //  align-items: center
+      //  justify-content: center
+      //  cursor: pointer
+      //
+      //  &:hover
+      //    span
+      //      color: #1ecf9d
+      //
+      //  span
+      //    color: #7A7A7C
 
   .Placeholder
     hr
