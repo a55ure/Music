@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="PopularS">
+    <div class="PopularS" >
       <div class="PopularRecommendationItem" v-for="item in songList" :key="item.id">
         <div class="PopularRecommendationItemContent">
           <div class="coverImgUrl">
-            <div class="maskDisplay">
+            <div class="maskDisplay" @click="details"><!--点击mask跳转歌单详情页-->
               <div class="mask">
                 <Icon type="play"></Icon>
               </div>
@@ -46,6 +46,8 @@ export default {
     // console.log(this.songList, 77777)
   },
   methods: {
+    details() {
+    },
     getPlayCount(playCout) {
       // this.PopularRecommendationList
       if ((playCout / 100000) > 0) {
@@ -64,19 +66,6 @@ export default {
   min-width: 1100px
   display: flex
   //justify-content: space-around
-
-  //.slide
-  //  display: flex
-  //  align-items: center
-  //  justify-content: center
-  //  cursor: pointer
-  //
-  //  &:hover
-  //    span
-  //      color: #1ecf9d
-  //
-  //  span
-  //    color: #7A7A7C
 
   .PopularRecommendationItem
     color: #f9f9f9

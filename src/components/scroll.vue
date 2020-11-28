@@ -2,13 +2,15 @@
   <div>
     <div class="main">
       <div class="slide">
-        <span class="material-icons">arrow_back_ios</span>
+        <span class="material-icons" @click="scrollEventLeft">arrow_back_ios</span>
       </div>
-      <div class="conent" @scroll="scroolEvent">
-        <songList class="list" v-if="PopularRecommendationList" :songList="PopularRecommendationList"></songList>
-      </div>
+      <transition name="slide-fade" mode="out-in">
+        <div class="conent" ref="songList" v-if=true>
+          <songList class="list" v-if="PopularRecommendationList" :songList="PopularRecommendationList"></songList>
+        </div>
+      </transition>
       <div class="slide">
-        <span class="material-icons">arrow_forward_ios</span>
+        <span class="material-icons" @click="scrollEventRight">arrow_forward_ios</span>
       </div>
     </div>
   </div>
@@ -21,7 +23,8 @@ export default {
   name: 'scroll',
   data() {
     return {
-      PopularRecommendationList: ''
+      PopularRecommendationList: '',
+      sroll: ''
     }
   },
   components: {
@@ -31,8 +34,19 @@ export default {
     this.getPopularRecommendation()
   },
   methods: {
-    scroolEvent(){
-      console.log('我滚动了')
+    scrollEventLeft() {
+      this.sroll = this.$refs.songList
+      this.$refs.songList.scrollLeft = 0
+      // console.log(this.sroll.scrollWidth)
+      console.log(this.sroll.scrollLeft)
+      // console.log('我滚动了')
+    },
+    scrollEventRight() {
+      this.sroll = this.$refs.songList
+      this.$refs.songList.scrollLeft = 1100
+      // console.log(this.sroll.scrollWidth)
+      console.log(this.sroll.scrollLeft)
+      // console.log('我滚动了')
     },
     getPopularRecommendation() {
       var that = this
@@ -49,6 +63,12 @@ export default {
 </script>
 
 <style scoped lang="sass">
+.slide-fade-enter-active, .slide-fade-leave-active
+  transition: all 3s ease
+
+.fade-enter, .fade-leave-active
+  transition: all ease
+
 .main
   height: 220px
   width: 1210px
@@ -64,7 +84,6 @@ export default {
     display: flex
 
     &::-webkit-scrollbar
-
 
   .slide
     display: flex

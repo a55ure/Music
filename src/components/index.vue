@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import songList from '@/components/songList.vue'
+// import songList from '@/components/songList.vue'
 import scroll from '@/components/scroll.vue'
 
 export default {
@@ -50,7 +50,7 @@ export default {
     }
   },
   components: {
-    songList,
+    // songList,
     scroll
   },
   created() {
