@@ -2,15 +2,13 @@
   <div>
     <div class="main">
       <div class="slide">
-        <span class="material-icons" @click="scrollEventLeft">arrow_back_ios</span>
+        <span class="material-icons" @click="clickRight">arrow_back_ios</span>
       </div>
-      <transition name="slide-fade" mode="out-in">
-        <div class="conent" ref="songList" v-if=true>
-          <songList class="list" v-if="PopularRecommendationList" :songList="PopularRecommendationList"></songList>
-        </div>
-      </transition>
+      <div class="conent" ref="songList" v-if=true>
+        <songList class="list" v-if="PopularRecommendationList" :songList="PopularRecommendationList"></songList>
+      </div>
       <div class="slide">
-        <span class="material-icons" @click="scrollEventRight">arrow_forward_ios</span>
+        <span class="material-icons" @click="clickLeft">arrow_forward_ios</span>
       </div>
     </div>
   </div>
@@ -24,7 +22,10 @@ export default {
   data() {
     return {
       PopularRecommendationList: '',
-      sroll: ''
+      sroll: '',
+      shiftScrollLeft: {},
+      shiftScrollRight: {},
+      Sspeed: 0
     }
   },
   components: {
@@ -33,20 +34,42 @@ export default {
   created() {
     this.getPopularRecommendation()
   },
+  mounted() {
+  },
   methods: {
-    scrollEventLeft() {
+    clickLeft() {
+      this.shiftScrollLeft = setInterval(this.increasing, 2)
+    },
+    clickRight() {
+      this.shiftScrollRight = setInterval(this.decreasing, 2)
+    },
+    scrollEventLeft() { // 点击箭头 滑动到最左边
       this.sroll = this.$refs.songList
       this.$refs.songList.scrollLeft = 0
       // console.log(this.sroll.scrollWidth)
       console.log(this.sroll.scrollLeft)
       // console.log('我滚动了')
     },
-    scrollEventRight() {
+    scrollEventRight() { // 点击箭头 滑动到最右边
       this.sroll = this.$refs.songList
       this.$refs.songList.scrollLeft = 1100
       // console.log(this.sroll.scrollWidth)
-      console.log(this.sroll.scrollLeft)
-      // console.log('我滚动了')
+      // console.log(this.sroll.scrollLeft)
+    },
+    increasing() { // 让数值缓慢增加 Slength 运行长度 Stime 执行时间
+      // this.Sspeed = Slength / (Stime * 1000) // 执行速度
+      this.$refs.songList.scrollLeft += 22
+      if ((this.$refs.songList.scrollLeft + 22) >= 1100) {
+        this.$refs.songList.scrollLeft = 1100
+        clearInterval(this.shiftScrollLeft)
+      }
+    },
+    decreasing() {
+      this.$refs.songList.scrollLeft -= 22
+      if ((this.$refs.songList.scrollLeft - 22) <= 0) {
+        this.$refs.songList.scrollLeft = 0
+        clearInterval(this.shiftScrollRight)
+      }
     },
     getPopularRecommendation() {
       var that = this
@@ -66,7 +89,7 @@ export default {
 .slide-fade-enter-active, .slide-fade-leave-active
   transition: all 3s ease
 
-.fade-enter, .fade-leave-active
+.slide-fade-enter, .slide-fade-leave-to
   transition: all ease
 
 .main
@@ -79,7 +102,7 @@ export default {
 
   .conent
     width: 1100px
-    overflow-x: scroll
+    overflow-x: hidden
     overflow-y: hidden
     display: flex
 
