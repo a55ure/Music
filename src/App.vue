@@ -66,8 +66,8 @@
         </div>
       </div>
       <div class="rightIndex">
-        <!--        <router-view></router-view>-->
-        <indexVue class="indexPage"></indexVue>
+        <router-view></router-view>
+<!--        <indexVue class="indexPage"></indexVue>-->
       </div>
       <!--      播放进度信息-->
       <div class="Progress">
@@ -79,7 +79,7 @@
 
 <script>
 import playerAu from '@/components/player'
-import indexVue from '@/components/index.vue'
+// import indexVue from '@/components/index.vue'
 
 export default {
   name: 'app',
@@ -89,8 +89,8 @@ export default {
     }
   },
   components: {
-    playerAu,
-    indexVue
+    playerAu
+    // indexVue
   }
 }
 </script>
@@ -113,7 +113,6 @@ html, body
     height: 100%
     width: 100%
     font-family: A
-    text-align: center
     display: grid
     grid-template-columns: 15% 85%
 

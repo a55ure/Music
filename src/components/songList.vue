@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="PopularS" >
+    <div class="PopularS">
       <div class="PopularRecommendationItem" v-for="item in songList" :key="item.id">
         <div class="PopularRecommendationItemContent">
           <div class="coverImgUrl">
-            <div class="maskDisplay" @click="details"><!--点击mask跳转歌单详情页-->
+            <div class="maskDisplay" @click="details(item.id)"><!--点击mask跳转歌单详情页-->
               <div class="mask">
                 <Icon type="play"></Icon>
               </div>
@@ -27,11 +27,14 @@
 </template>
 
 <script>
+// import router from '@/router'
+
 export default {
   name: 'songList',
   data() {
     return {
-      used: ''
+      used: '',
+      id: 0
     }
   },
   props: {
@@ -46,7 +49,18 @@ export default {
     // console.log(this.songList, 77777)
   },
   methods: {
-    details() {
+    details(id) { // 跳转页面并传歌单ID
+      this.id = id
+      this.$router.push(
+        {
+          name: 'details',
+          params:
+            {
+              id: this.id
+            }
+        }
+      )
+      // console.log(id)
     },
     getPlayCount(playCout) {
       // this.PopularRecommendationList

@@ -1,14 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from '../components/index.vue'
+import index from '../components/index.vue'
+import details from '../components/PlaylistDetails'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Index',
-    component: Index
+    name: 'index',
+    component: index
+  },
+  {
+    path: '/details',
+    name: 'details',
+    component: details
   },
   {
     path: '/about',
