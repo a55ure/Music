@@ -3,7 +3,7 @@
     <div class="top"> <!--//详情页的头部-->
       <div class="detailBox">
         <div class="detailImg"><!--详情的图片描述-->
-          <img :src="songListDetail.coverImgUrl" alt="" id="detailImg">
+          <img v-if="status" :src="songListDetail.coverImgUrl" alt="" id="detailImg">
         </div>
         <div class="detailTxt"><!--详情的文字描述-->
           <div class="tittle divMargin">
@@ -17,9 +17,9 @@
             <span>{{ songListDetail.description }}</span>
           </div>
           <div class="playColl ">
-            <div class="playAll subPlayColl">
+            <div class="subPlayColl">
               <Icon type="ios-play-outline"/>
-              播放全部
+              <span>播放全部</span>
             </div>
             <div class="collect subPlayColl">
               <Icon type="ios-heart-outline"/>
@@ -29,7 +29,8 @@
         </div>
       </div>
     </div>
-    <div class="bottom"></div>
+    <div class="bottom">
+    </div>
   </div>
 </template>
 
@@ -41,11 +42,16 @@ export default {
   data() {
     return {
       id: {},
-      songListDetail: ''
+      songListDetail: '',
+      songSum: 0,
+      songIds: [],
+      status: false
     }
   },
   mounted() {
     this.getDetail()
+    console.log(this.songListDetail)
+    this.songDetailId()
   },
   created() {
     this.id = this.$route.params.id
@@ -54,12 +60,21 @@ export default {
     getDetail() {
       var that = this
       this.$axios.get('http://39.98.144.206:3000/playlist/detail?id=' + that.id).then(function (res) {
-        console.log('http://39.98.144.206:3000/playlist/detail?id=' + that.id)
+        // console.log('http://39.98.144.206:3000/playlist/detail?id=' + that.id)/
         that.songListDetail = res.data.playlist
-        console.log(res.data.playlist)
+        that.status = true
+        // console.log(res.data.playlist)
       }).catch(function (res) {
         console.log(res)
       })
+    },
+    songDetailId() {
+      // eslint-disable-next-line no-unused-vars
+      var detail
+      for (detail in this.songListDetail.trackIds) {
+        console.log(this.songListDetail.trackIds[detail])
+        // this.songIds.pop(this.songListDetail.trackIds[detail])
+      }
     }
   }
 }
@@ -138,10 +153,17 @@ export default {
           height: 36px
           border-radius: 18px
           display: flex
-          justify-items: center
-          align-content: center
-        .playAll
+          justify-content: center
+          align-items: center
           background-color: #42b983
+          margin-left: 10px
+
+          &:hover
+            background-color: #1EC493
+
         .collect
           background-color: #2e2e30
+
+          &:hover
+            background-color: #3A3A3C
 </style>

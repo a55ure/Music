@@ -54,15 +54,15 @@
         </div>
         <div class="list">
           <span class="material-icons">queue_music</span>
-<!--          播放了列表数量-->
-          <span>{{12}}</span>
+          <!--          播放了列表数量-->
+          <span>{{ 12 }}</span>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import tryaudio from '@/components/radio/try.flac'
+// import tryaudio from '@/components/radio/try.flac'
 import audioStart from '@/components/image/pause.png'
 import audioStop from '@/components/image/start.png'
 import defaultImage from '@/components/image/default.jpg'
@@ -70,19 +70,15 @@ import defaultImage from '@/components/image/default.jpg'
 export default {
   name: '',
   props: {
-    params: {
-      type: Object,
-      default: () => ({
-        message: 'hello'
-      })
-    }
+    params: {}
   },
-  data () {
+  data() {
     return {
+      songId: 0,
       songName: '告白气球',
       playerIcon: 'play_circle_filled',
       progressing_audio: 0,
-      music: tryaudio,
+      music: '',
       playFlag: false,
       audioPlayShow: true,
       timer: '',
@@ -91,15 +87,48 @@ export default {
       imgA: audioStart,
       imgB: audioStop,
       songImg: defaultImage,
-      playSongTime: 0
+      playSongTime: 0,
+      songInfo: '1'
+    }
+  },
+  mounted() {
+    this.songId = this.$store.state.songId
+    this.getSongInfo()
+    this.setInfo()
+    console.log(this.songInfo)
+  },
+  created() {
+  },
+  computed: {
+    getSongId: {
+      set: function () {
+        this.songId = this.$store.state.songId
+      },
+      get: function () {
+        return this.songId
+      }
     }
   },
   methods: {
+    getSongInfo() {
+      var that = this
+      this.$axios.get('http://39.98.144.206:3000/song/url?id=' + that.songId).then(function (res) {
+        that.music = res.data.data[0].url
+        // that.songImg =
+      }).catch(function (res) {
+        console.log(res)
+      })
+    },
     totalTime: function () {
       this.playSongTime = this.$refs.player.duration
     },
     processFormat: function (percentage) {
       // return this.second
+    },
+    setInfo() {
+      this.music = this.songInfo.url
+      // console.log(this.music)
+      // console.log(this.songInfo.url)
     },
     controlAudio: function () {
       this.totalTime()
@@ -233,6 +262,7 @@ export default {
 
         span
           cursor: pointer
+
           &:hover
             color: #1ecf9d
 
@@ -245,6 +275,7 @@ export default {
 
         span
           cursor: pointer
+
           &:hover
             color: #1ecf9d
 
@@ -253,6 +284,7 @@ export default {
       display: flex
       justify-content: center
       align-items: center
+
       .time
         .time-font
           margin-top: .1rem
@@ -263,6 +295,7 @@ export default {
           line-height: .34rem
           float: left
           margin-left: 0rem
+
       .list
         //background-color: #1ecf9d
         margin-left: 10px
